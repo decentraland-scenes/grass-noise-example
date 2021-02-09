@@ -1,4 +1,4 @@
-import { Noise } from '../node_modules/@dcl/noise-utils/index'
+import { Noise } from '@dcl/noise-utils'
 
 @Component('WaveGrass')
 export class WaveGrass {}

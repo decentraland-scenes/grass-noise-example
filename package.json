@@ -11,9 +11,12 @@
     "ecs:install-next": "npm install --save-dev decentraland-ecs@next"
   },
   "devDependencies": {
-    "decentraland-ecs": "^6.6.3"
+    "decentraland-ecs": "^6.6.4-20210209210831.commit-8167f94"
   },
   "dependencies": {
-    "@dcl/noise-utils": "^1.0.3"
-  }
+    "@dcl/noise-utils": "^1.0.11"
+  },
+  "bundleDependencies": [
+    "@dcl/noise-utils"
+  ]
 }
