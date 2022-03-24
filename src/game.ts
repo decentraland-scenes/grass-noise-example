@@ -12,7 +12,7 @@ class PerlinNoiseSystem implements ISystem {
   update(dt: number) {
     t += dt / 4
     // iterate over the entities of the group
-    for (let entity of this.group.entities) {
+    for (const entity of this.group.entities) {
       // get the Transform component of the entity
       const transform = entity.getComponent(Transform)
 
@@ -41,7 +41,7 @@ ground.addComponent(new GLTFShape('models/ground.glb'))
 engine.addEntity(ground)
 
 /// --- Spawner function ---
-let hoverSystem = new PerlinNoiseSystem()
+const hoverSystem = new PerlinNoiseSystem()
 
 function spawnGrass(shape: Shape, x: number, y: number, z: number) {
   // create the entity
@@ -52,7 +52,7 @@ function spawnGrass(shape: Shape, x: number, y: number, z: number) {
     new Transform({
       position: new Vector3(x, y, z),
       rotation: Quaternion.Euler(0, Math.random() * 30, 0),
-      scale: new Vector3(1, 0.5 + Math.random() / 2, 1),
+      scale: new Vector3(1, 0.5 + Math.random() / 2, 1)
     })
   )
 
@@ -60,7 +60,7 @@ function spawnGrass(shape: Shape, x: number, y: number, z: number) {
   grass.addComponent(shape)
   grass.addComponent(new WaveGrass())
 
-  let col = new Material()
+  const col = new Material()
   col.albedoColor = new Color3(x / 16, y / 16, z / 4)
   grass.addComponent(col)
 
@@ -84,14 +84,14 @@ function spawnGrass(shape: Shape, x: number, y: number, z: number) {
 
 /// --- Spawn grass blades ---
 
-let grassShape = new GLTFShape('models/grass.glb')
-let grass2Shape = new GLTFShape('models/grass2.glb')
-let grass3Shape = new GLTFShape('models/grass3.glb')
+const grassShape = new GLTFShape('models/grass.glb')
+const grass2Shape = new GLTFShape('models/grass2.glb')
+const grass3Shape = new GLTFShape('models/grass3.glb')
 
-for (var x = 0.5; x < 16; x++) {
-  for (var y = 0.5; y < 16; y++) {
+for (let x = 0.5; x < 16; x++) {
+  for (let y = 0.5; y < 16; y++) {
     // select a glb mesh randomly from the 3 variations
-    let selector = Math.random()
+    const selector = Math.random()
 
     if (selector > 0.66) {
       spawnGrass(grassShape, x, 0, y)
