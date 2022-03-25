@@ -11,6 +11,7 @@ class PerlinNoiseSystem implements ISystem {
 
   update(dt: number) {
     t += dt / 4
+
     // iterate over the entities of the group
     for (const entity of this.group.entities) {
       // get the Transform component of the entity
@@ -41,7 +42,7 @@ ground.addComponent(new GLTFShape('models/ground.glb'))
 engine.addEntity(ground)
 
 /// --- Spawner function ---
-const hoverSystem = new PerlinNoiseSystem()
+engine.addSystem(new PerlinNoiseSystem())
 
 function spawnGrass(shape: Shape, x: number, y: number, z: number) {
   // create the entity
@@ -52,7 +53,7 @@ function spawnGrass(shape: Shape, x: number, y: number, z: number) {
     new Transform({
       position: new Vector3(x, y, z),
       rotation: Quaternion.Euler(0, Math.random() * 30, 0),
-      scale: new Vector3(1, 0.5 + Math.random() / 2, 1)
+      scale: new Vector3(1, 0.5 + Math.random() / 2, 1),
     })
   )
 
@@ -63,18 +64,6 @@ function spawnGrass(shape: Shape, x: number, y: number, z: number) {
   const col = new Material()
   col.albedoColor = new Color3(x / 16, y / 16, z / 4)
   grass.addComponent(col)
-
-  grass.addComponent(
-    new OnClick(() => {
-      if (!started) {
-        engine.addSystem(hoverSystem)
-        started = true
-      } else {
-        engine.removeSystem(hoverSystem)
-        started = false
-      }
-    })
-  )
 
   // add the entity to the engine
   engine.addEntity(grass)
@@ -88,8 +77,8 @@ const grassShape = new GLTFShape('models/grass.glb')
 const grass2Shape = new GLTFShape('models/grass2.glb')
 const grass3Shape = new GLTFShape('models/grass3.glb')
 
-for (let x = 0.5; x < 16; x++) {
-  for (let y = 0.5; y < 16; y++) {
+for (let x = 0.7; x < 15.4; x++) {
+  for (let y = 0.7; y < 15.4; y++) {
     // select a glb mesh randomly from the 3 variations
     const selector = Math.random()
 
